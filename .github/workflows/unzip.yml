@@ -4,24 +4,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  unzip-file:
+  unzip-and-push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Install Unzip
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
 
       - name: Unzip the file
         run: |
-          # Replace 'hotspot-pkg.zip' with the actual path to your zipped file
+          # Ganti 'hotspot-pkg.zip' dengan nama file Anda
           unzip hotspot-pkg.zip
 
-      - name: Verify Contents
+      - name: Configure Git
         run: |
-          echo "Listing the unzipped contents:"
-          ls -R
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add and Commit Unzipped Files
+        run: |
+          git add .
+          git commit -m "Add unzipped files from workflow"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
