@@ -1,0 +1,27 @@
+name: Unzip File Manually
+
+on:
+  workflow_dispatch:
+
+jobs:
+  unzip-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+
+      - name: Unzip the file
+        run: |
+          # Replace 'hotspot-pkg.zip' with the actual path to your zipped file
+          unzip hotspot-pkg.zip
+
+      - name: Verify Contents
+        run: |
+          echo "Listing the unzipped contents:"
+          ls -R
