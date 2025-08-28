@@ -1,25 +1,25 @@
-name: Build OpenWrt IPK
+name: Build Hotspot Package
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install opkg-build
+      - name: Install necessary tools
         run: sudo apt-get update && sudo apt-get install -y opkg-tools
 
-      - name: Run Build Script
+      - name: Run build script
         run: ./build.sh
+        working-directory: ./hotspot-pkg
 
-      - name: Upload IPK Artifact
+      - name: Upload IPK as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: hotspot-themes-ipk
-          path: output/packages/*.ipk
+          name: hotspot-ipk
+          path: hotspot-pkg/output/packages/*.ipk
