@@ -1,30 +1,27 @@
 #!/bin/sh
-# =====================================================
-# Skrip Build IPK untuk GitHub Actions
-# =====================================================
 
 set -e
 
 PKGNAME="hotspot-themes"
-VERSION=$(date +%Y%m%d-%H%M) # Versi berdasarkan tanggal
+VERSION=$(date +%Y%m%d-%H%M)
 ARCH="all"
-WORKDIR="hotspot-pkg"
+WORKDIR="build"
+OUTDIR="output"
 
 echo "======================================"
 echo "HOTSPOT THEME IPK BUILD LOG"
 echo "======================================"
 
-echo "[*] Bersihkan direktori kerja..."
-rm -rf "$WORKDIR"
-mkdir -p "$WORKDIR"
+echo "[*] Cleaning up build directories..."
+rm -rf "$WORKDIR" "$OUTDIR"
+mkdir -p "$WORKDIR/CONTROL" "$WORKDIR/data/www" "$OUTDIR/packages"
 
-# Salin file ke struktur build
-echo "[*] Salin file ke struktur build..."
-cp -r data/ "$WORKDIR/"
-cp control "$WORKDIR/CONTROL"
+echo "[*] Copying files to build directory..."
+cp -r CONTROL/* "$WORKDIR/CONTROL/"
+cp -r data/www/* "$WORKDIR/data/www/"
 
-# Buat file postinst
-echo "[*] Buat file postinst..."
+# Create postinst file
+echo "[*] Creating postinst file..."
 cat > "$WORKDIR/CONTROL/postinst" << "EOP"
 #!/bin/sh
 uci set chilli.@chilli[0].uamserver='http://192.168.1.1/loginpage.php'
@@ -34,10 +31,7 @@ exit 0
 EOP
 chmod 755 "$WORKDIR/CONTROL/postinst"
 
-# Build IPK menggunakan opkg-build
-echo "[*] Build IPK..."
-mkdir -p output/packages
-opkg-build "$WORKDIR" output/packages
+echo "[*] Building IPK package..."
+opkg-build "$WORKDIR" "$OUTDIR/packages"
 
-echo "[OK] IPK selesai. File ada di output/packages"
-
+echo "[OK] IPK build successful. File location: $OUTDIR/packages"
