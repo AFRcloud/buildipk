@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: openwrt/sdk:23.05.2-aarch64
+    container: openwrt/sdk:aarch64_generic
 
     steps:
       - name: Checkout repository
