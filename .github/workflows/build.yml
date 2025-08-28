@@ -15,11 +15,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y opkg-tools
 
       - name: Run build script
-        run: ./build.sh
-        working-directory: ./hotspot-pkg
+        run: ./hotspot-pkg/build.sh
 
       - name: Upload IPK as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: hotspot-ipk
           path: hotspot-pkg/output/packages/*.ipk
