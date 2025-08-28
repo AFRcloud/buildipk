@@ -1,0 +1,7 @@
+Package: hotspot-themes
+Version: 20250827-1828
+Architecture: all
+Maintainer: Admin <admin@example.com>
+Section: net
+Priority: optional
+Description: Hotspot login themes with selector

@@ -1,0 +1,5 @@
+#!/bin/sh
+uci set chilli.@chilli[0].uamserver='http://192.168.1.1/loginpage.php'
+uci commit chilli
+/etc/init.d/chilli restart
+exit 0

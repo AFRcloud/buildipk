@@ -1,0 +1,254 @@
+.package-header-simple {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.package-title-simple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.package-item {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.package-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff9a00,
+    #d0de21,
+    #4fdc4a,
+    #3fdad8,
+    #2fc9e2,
+    #1c7fee,
+    #5f15f2,
+    #ba0cf8,
+    #fb07d9,
+    #ff0000
+  );
+  background-size: 200% 100%;
+  animation: rainbow 6s linear infinite;
+  z-index: 1;
+}
+
+.package-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.package-content {
+  margin-bottom: 1rem;
+}
+
+.package-name-simple {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+}
+
+.package-duration-simple {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0.8;
+}
+
+.package-price-simple {
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 0.2rem;
+}
+
+.package-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-buy-simple {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-buy-simple:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-wa-simple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.6rem;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+.btn-wa-simple:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
+/* Skeleton Loading */
+.package-item.skeleton {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.skeleton-name,
+.skeleton-bandwidth,
+.skeleton-price,
+.skeleton-btn,
+.skeleton-btn-small {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  animation: pulse 2s infinite;
+}
+
+.skeleton-name {
+  height: 1rem;
+  width: 80%;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-price {
+  height: 1.1rem;
+  width: 60%;
+}
+
+.skeleton-btn {
+  height: 2.2rem;
+  flex: 1;
+}
+
+.skeleton-btn-small {
+  height: 2.2rem;
+  width: 60px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .package-grid {
+    gap: 0.75rem;
+  }
+
+  .package-item {
+    padding: 0.8rem;
+  }
+
+  .package-name-simple {
+    font-size: 0.9rem;
+  }
+
+  .package-price-simple {
+    font-size: 1rem;
+  }
+
+  .btn-buy-simple {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-wa-simple {
+    padding: 0.5rem;
+    min-width: 50px;
+  }
+}
+
+:root {
+  --success: #22c55e;
+}
